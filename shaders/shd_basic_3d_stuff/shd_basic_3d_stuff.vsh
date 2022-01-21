@@ -13,6 +13,7 @@ uniform mat4 u_lightViewMat;
 uniform mat4 u_lightProjMat;
 
 varying float v_LightDistance;
+varying vec2 v_ShadowTexcoord;
 
 void main() {
     vec4 object_space_pos = vec4(in_Position.x, in_Position.y, in_Position.z, 1.0);
@@ -29,4 +30,5 @@ void main() {
     vec4 screenSpace = u_lightProjMat * cameraSpace;
     
     v_LightDistance = screenSpace.z / screenSpace.w;
+    v_ShadowTexcoord = ((screenSpace.xy / screenSpace.w) * 0.5) + 0.5;
 }
