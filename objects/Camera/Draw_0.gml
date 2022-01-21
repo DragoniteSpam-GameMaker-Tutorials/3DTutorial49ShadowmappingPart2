@@ -7,6 +7,11 @@ var camera = camera_get_active();
 var camera_distance = 160;
 
 #region shadowmap surface
+
+sun_x = Player.x - 200;
+sun_y = Player.y - 200;
+sun_z = Player.z + 200;
+
 var xfrom = sun_x;
 var yfrom = sun_y;
 var zfrom = sun_z;
