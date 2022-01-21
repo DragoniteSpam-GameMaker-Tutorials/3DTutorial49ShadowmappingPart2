@@ -9,6 +9,11 @@ varying vec4 v_vColour;
 varying vec3 v_worldPosition;
 varying vec3 v_worldNormal;
 
+uniform mat4 u_lightViewMat;
+uniform mat4 u_lightProjMat;
+
+varying float v_LightDistance;
+
 void main() {
     vec4 object_space_pos = vec4(in_Position.x, in_Position.y, in_Position.z, 1.0);
     gl_Position = gm_Matrices[MATRIX_WORLD_VIEW_PROJECTION] * object_space_pos;
@@ -18,4 +23,10 @@ void main() {
     
     v_vColour = in_Colour;
     v_vTexcoord = in_TextureCoord;
+    
+    vec4 worldSpace = gm_Matrices[MATRIX_WORLD] * vec4(in_Position, 1);
+    vec4 cameraSpace = u_lightViewMat * worldSpace;
+    vec4 screenSpace = u_lightProjMat * cameraSpace;
+    
+    v_LightDistance = screenSpace.z / screenSpace.w;
 }

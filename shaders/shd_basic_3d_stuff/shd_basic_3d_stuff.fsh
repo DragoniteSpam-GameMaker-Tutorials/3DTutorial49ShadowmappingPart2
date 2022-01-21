@@ -6,6 +6,8 @@ varying vec3 v_worldNormal;
 
 uniform vec3 lightDirection;
 
+varying float v_LightDistance;
+
 void main() {
     vec4 starting_color = v_vColour * texture2D(gm_BaseTexture, v_vTexcoord);
     

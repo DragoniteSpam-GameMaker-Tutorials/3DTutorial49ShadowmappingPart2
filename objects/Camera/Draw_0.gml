@@ -21,10 +21,10 @@ draw_clear(c_black);
 
 // You need to do this AFTER setting the surface target,
 // otherwise the camera will be in the wrong place
-view_mat = matrix_build_lookat(xfrom, yfrom, zfrom, xto, yto, zto, 0, 0, 1);
-proj_mat = matrix_build_projection_ortho(shadowmap_size, -shadowmap_size, znear, zfar);
-camera_set_view_mat(camera, view_mat);
-camera_set_proj_mat(camera, proj_mat);
+light_view_mat = matrix_build_lookat(xfrom, yfrom, zfrom, xto, yto, zto, 0, 0, 1);
+light_proj_mat = matrix_build_projection_ortho(shadowmap_size / 2, -shadowmap_size / 2, znear, zfar);
+camera_set_view_mat(camera, light_view_mat);
+camera_set_proj_mat(camera, light_proj_mat);
 camera_apply(camera);
 
 scr_draw_all_the_stuff();
@@ -49,6 +49,9 @@ proj_mat = matrix_build_projection_perspective_fov(-60, -window_get_width() / wi
 camera_set_view_mat(camera, view_mat);
 camera_set_proj_mat(camera, proj_mat);
 camera_apply(camera);
+
+shader_set_uniform_f_array(shader_get_uniform(shd_basic_3d_stuff, "u_lightViewMat"), light_view_mat);
+shader_set_uniform_f_array(shader_get_uniform(shd_basic_3d_stuff, "u_lightProjMat"), light_proj_mat);
 
 scr_draw_all_the_stuff();
 
