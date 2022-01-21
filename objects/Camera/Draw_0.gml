@@ -52,6 +52,7 @@ camera_apply(camera);
 
 shader_set_uniform_f_array(shader_get_uniform(shd_basic_3d_stuff, "u_lightViewMat"), light_view_mat);
 shader_set_uniform_f_array(shader_get_uniform(shd_basic_3d_stuff, "u_lightProjMat"), light_proj_mat);
+texture_set_stage(shader_get_sampler_index(shd_basic_3d_stuff, "s_DepthTexture"), surface_get_texture(shadowmap_surface));
 
 scr_draw_all_the_stuff();
 
