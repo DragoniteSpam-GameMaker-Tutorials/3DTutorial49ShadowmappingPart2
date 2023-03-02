@@ -11,11 +11,6 @@ varying vec2 v_ShadowTexcoord;
 
 uniform sampler2D s_DepthTexture;
 
-const vec3 UNDO = vec3(1.0, 256.0, 65536.0) / 16777215.0 * 255.0;
-float fromDepthColor(vec3 color) {
-    return dot(color, UNDO);
-}
-
 void main() {
     vec4 starting_color = v_vColour * texture2D(gm_BaseTexture, v_vTexcoord);
     
@@ -28,7 +23,7 @@ void main() {
     //gl_FragColor = final_color;
     
     vec4 sampledDepthColor = texture2D(s_DepthTexture, v_ShadowTexcoord);
-    float depthValue = fromDepthColor(sampledDepthColor.rgb);
+    float depthValue = sampledDepthColor.r;
     
     float bias = 0.0005;
     if (v_LightDistance > depthValue + bias) {

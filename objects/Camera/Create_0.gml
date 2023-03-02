@@ -74,4 +74,4 @@ sun_dy = 1;
 sun_dz = -1;
 
 shadowmap_size = 2048;
-shadowmap_surface = surface_create(shadowmap_size, shadowmap_size);
+shadowmap_surface = surface_create(shadowmap_size, shadowmap_size, surface_r32float);
